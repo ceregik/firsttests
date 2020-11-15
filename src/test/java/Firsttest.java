@@ -5,14 +5,16 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 
 public class Firsttest {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
+    private WebDriver driver, driver1;
+    private WebDriverWait wait, wait1;
 
 
     @Before
@@ -25,7 +27,7 @@ public class Firsttest {
     public void FirstTest() {
         driver.get("https://www.google.com/");
         driver.findElement(By.name("q")).sendKeys("webdriver");
-        driver.findElement(By.name("btnK")).click();;
+        driver.findElement(By.name("btnK")).click();
         wait.until(titleIs("webdriver - Поиск в Google"));
     }
 
