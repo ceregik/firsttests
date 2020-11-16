@@ -21,6 +21,7 @@ public class stickers {
 
     public boolean isElementPresent(By locator){
         try {
+          //  System.out.println("ok");
             driver.findElement(locator);
             return true;
         } catch (NoSuchElementException ex){
@@ -43,19 +44,16 @@ public class stickers {
     @Test
     public void stickersTest() {
         driver.get("http://localhost/litecart");
-        List<WebElement> Box = driver.findElements(By.cssSelector("#box-most-popular li.product.column.shadow.hover-light"));
-        for(int i=1;i<=Box.size();i++){
-            assertTrue(isElementPresent(By.cssSelector("#box-most-popular li.product.column.shadow.hover-light:nth-child(" + i + ") div.sticker")));
-        }
+        List<WebElement> Box = driver.findElements(By.cssSelector("div.content li.product.column.shadow.hover-light"));
+        List<WebElement> HowMutch;
+        for(int i=0;i<Box.size();i++){
+             HowMutch = Box.get(i).findElements(By.cssSelector("div.sticker"));
+             if (HowMutch.size() == 1){
+                 System.out.println("OK");
+            } else{
+                 System.out.println("Stickers are more then one or less");
+             }
 
-        Box = driver.findElements(By.cssSelector("#box-campaigns li.product.column.shadow.hover-light"));
-        for(int i=1;i<=Box.size();i++){
-            assertTrue(isElementPresent(By.cssSelector("#box-campaigns li.product.column.shadow.hover-light:nth-child(" + i + ") div.sticker")));
-        }
-
-         Box = driver.findElements(By.cssSelector("#box-latest-products li.product.column.shadow.hover-light"));
-        for(int i=1;i<=Box.size();i++){
-            assertTrue(isElementPresent(By.cssSelector("#box-latest-products li.product.column.shadow.hover-light:nth-child(" + i + ") div.sticker")));
         }
 
     }
