@@ -44,7 +44,7 @@ public class stickers {
     @Test
     public void stickersTest() {
         driver.get("http://localhost/litecart");
-        List<WebElement> Box = driver.findElements(By.cssSelector("div.content li.product.column.shadow.hover-light"));
+        List<WebElement> Box = driver.findElements(By.cssSelector(".product"));
         List<WebElement> HowMutch;
         for(int i=0;i<Box.size();i++){
              HowMutch = Box.get(i).findElements(By.cssSelector("div.sticker"));
