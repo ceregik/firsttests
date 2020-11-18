@@ -36,9 +36,32 @@ public class Price {
         String PriceBefore = link.findElement(By.cssSelector("s.regular-price")).getText();
         String PriceSale = link.findElement(By.cssSelector("strong.campaign-price")).getText();
 
-        String PriceBeforeSize = link.findElement(By.cssSelector("s.regular-price")).getCssValue("font-size");
-        String PriceSaleSize = link.findElement(By.cssSelector("strong.campaign-price")).getCssValue("font-size");
-        if (PriceBeforeSize.compareTo(PriceSaleSize)>0){
+        int r,g,b;
+        String str;
+
+        str = link.findElement(By.cssSelector("s.regular-price")).getCssValue("color");
+        r = Integer.parseInt(str.substring(5,8));
+        g = Integer.parseInt(str.substring(10,13));
+        b = Integer.parseInt(str.substring(15,18));
+        RegPrice = (link.findElement(By.cssSelector("s.regular-price")).getCssValue("text-decoration-line").equals("line-through"))&
+                (r == g)& (g == b);
+        if (!RegPrice){
+            fail();
+        }
+
+        str = link.findElement(By.cssSelector("strong.campaign-price")).getCssValue("color");
+        g = Integer.parseInt(str.substring(10,11));
+        b = Integer.parseInt(str.substring(13,14));
+        CamPrice = (link.findElement(By.cssSelector("strong.campaign-price")).getCssValue("font-weight").equals("700")&
+                (g == b) & (b == 0));
+        if (!CamPrice){
+            fail();
+        }
+
+
+        int PriceBeforeSize = Integer.parseInt(link.findElement(By.cssSelector("s.regular-price")).getCssValue("font-size").substring(0,2));
+        int PriceSaleSize = Integer.parseInt(link.findElement(By.cssSelector("strong.campaign-price")).getCssValue("font-size").substring(0,2));
+        if (PriceBeforeSize>PriceSaleSize){
             fail();
         }
 
@@ -54,21 +77,29 @@ public class Price {
             fail();
         }
 
-        RegPrice = (link.findElement(By.cssSelector("s.regular-price")).getCssValue("text-decoration-line").equals("line-through")&
-                link.findElement(By.cssSelector("s.regular-price")).getCssValue("color").equals("rgba(102, 102, 102, 1)"));
+        str = link.findElement(By.cssSelector("s.regular-price")).getCssValue("color");
+        r = Integer.parseInt(str.substring(5,8));
+        g = Integer.parseInt(str.substring(10,13));
+        b = Integer.parseInt(str.substring(15,18));
+        RegPrice = (link.findElement(By.cssSelector("s.regular-price")).getCssValue("text-decoration-line").equals("line-through"))&
+                (r == g)& (g == b);
         if (!RegPrice){
             fail();
         }
 
+
+        str = link.findElement(By.cssSelector("strong.campaign-price")).getCssValue("color");
+        g = Integer.parseInt(str.substring(10,11));
+        b = Integer.parseInt(str.substring(13,14));
         CamPrice = (link.findElement(By.cssSelector("strong.campaign-price")).getCssValue("font-weight").equals("700")&
-                link.findElement(By.cssSelector("strong.campaign-price")).getCssValue("color").equals("rgba(204, 0, 0, 1)"));
+                (g == b) & (b == 0));
         if (!CamPrice){
             fail();
         }
 
-        PriceBeforeSize = link.findElement(By.cssSelector("s.regular-price")).getCssValue("font-size");
-        PriceSaleSize = link.findElement(By.cssSelector("strong.campaign-price")).getCssValue("font-size");
-        if (PriceBeforeSize.compareTo(PriceSaleSize)>0){
+        PriceBeforeSize = Integer.parseInt(link.findElement(By.cssSelector("s.regular-price")).getCssValue("font-size").substring(0,2));
+        PriceSaleSize = Integer.parseInt(link.findElement(By.cssSelector("strong.campaign-price")).getCssValue("font-size").substring(0,2));
+        if (PriceBeforeSize>PriceSaleSize){
             fail();
         }
 

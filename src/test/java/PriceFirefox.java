@@ -27,7 +27,7 @@ public class PriceFirefox {
     }
 
     @Test
-    public void PriceTest() {
+    public void PriceFirefoxTest() {
         driver.get("http://localhost/litecart");
 
         Boolean equalsNP,CamPrice,RegPrice;
@@ -37,9 +37,32 @@ public class PriceFirefox {
         String PriceBefore = link.findElement(By.cssSelector("s.regular-price")).getText();
         String PriceSale = link.findElement(By.cssSelector("strong.campaign-price")).getText();
 
-        String PriceBeforeSize = link.findElement(By.cssSelector("s.regular-price")).getCssValue("font-size");
-        String PriceSaleSize = link.findElement(By.cssSelector("strong.campaign-price")).getCssValue("font-size");
-        if (PriceBeforeSize.compareTo(PriceSaleSize)>0){
+        int r,g,b;
+        String str;
+
+        str = link.findElement(By.cssSelector("s.regular-price")).getCssValue("color");
+        r = Integer.parseInt(str.substring(4,7));
+        g = Integer.parseInt(str.substring(9,12));
+        b = Integer.parseInt(str.substring(14,17));
+        RegPrice = (link.findElement(By.cssSelector("s.regular-price")).getCssValue("text-decoration-line").equals("line-through"))&
+                (r == g)& (g == b);
+        if (!RegPrice){
+            fail();
+        }
+
+        str = link.findElement(By.cssSelector("strong.campaign-price")).getCssValue("color");
+        g = Integer.parseInt(str.substring(9,10));
+        b = Integer.parseInt(str.substring(12,13));
+        CamPrice = (link.findElement(By.cssSelector("strong.campaign-price")).getCssValue("font-weight").equals("700")&
+                (g == b) & (b == 0));
+        if (!CamPrice){
+            fail();
+        }
+
+
+        int PriceBeforeSize = Integer.parseInt(link.findElement(By.cssSelector("s.regular-price")).getCssValue("font-size").substring(0,2));
+        int PriceSaleSize = Integer.parseInt(link.findElement(By.cssSelector("strong.campaign-price")).getCssValue("font-size").substring(0,2));
+        if (PriceBeforeSize>PriceSaleSize){
             fail();
         }
 
@@ -55,21 +78,29 @@ public class PriceFirefox {
             fail();
         }
 
-        RegPrice = (link.findElement(By.cssSelector("s.regular-price")).getCssValue("text-decoration-line").equals("line-through")&
-                link.findElement(By.cssSelector("s.regular-price")).getCssValue("color").equals("rgb(102, 102, 102)"));
+        str = link.findElement(By.cssSelector("s.regular-price")).getCssValue("color");
+        r = Integer.parseInt(str.substring(4,7));
+        g = Integer.parseInt(str.substring(9,12));
+        b = Integer.parseInt(str.substring(14,17));
+        RegPrice = (link.findElement(By.cssSelector("s.regular-price")).getCssValue("text-decoration-line").equals("line-through"))&
+                (r == g)& (g == b);
         if (!RegPrice){
             fail();
         }
 
+
+        str = link.findElement(By.cssSelector("strong.campaign-price")).getCssValue("color");
+        g = Integer.parseInt(str.substring(9,10));
+        b = Integer.parseInt(str.substring(12,13));
         CamPrice = (link.findElement(By.cssSelector("strong.campaign-price")).getCssValue("font-weight").equals("700")&
-                link.findElement(By.cssSelector("strong.campaign-price")).getCssValue("color").equals("rgb(204, 0, 0)"));
+                (g == b) & (b == 0));
         if (!CamPrice){
             fail();
         }
 
-        PriceBeforeSize = link.findElement(By.cssSelector("s.regular-price")).getCssValue("font-size");
-        PriceSaleSize = link.findElement(By.cssSelector("strong.campaign-price")).getCssValue("font-size");
-        if (PriceBeforeSize.compareTo(PriceSaleSize)>0){
+        PriceBeforeSize = Integer.parseInt(link.findElement(By.cssSelector("s.regular-price")).getCssValue("font-size").substring(0,2));
+        PriceSaleSize = Integer.parseInt(link.findElement(By.cssSelector("strong.campaign-price")).getCssValue("font-size").substring(0,2));
+        if (PriceBeforeSize>PriceSaleSize){
             fail();
         }
 

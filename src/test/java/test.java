@@ -6,11 +6,11 @@ public class test {
     public void inter()
         {
 
-        String str1 = "18px";
-        String str2 = "14.4px";
-        if (str1.compareTo(str2)>0){
-            System.out.println("18>14.4");
+        String str1 = "rgba(102, 0, 0, 1)";
+        // 102 int k = Integer.parseInt(str1.substring(5,8));
+        // 102 int k = Integer.parseInt(str1.substring(10,13));
+         int k = Integer.parseInt(str1.substring(13,14));
+            System.out.println(k);
         }
-    }
 
 }
