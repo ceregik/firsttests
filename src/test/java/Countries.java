@@ -64,6 +64,7 @@ public class Countries {
         }
 
         for (int i=0;i<CountriesWithZones.size();i++){
+            assertFalse(areElementsPresent(By.name("XXX")));
             CountriesWithZones.get(i).click();
             Zones = driver.findElements(By.cssSelector("#table-zones td:nth-child(3)"));
                 for (int y=0;y<Zones.size()-2;y++){
@@ -75,6 +76,25 @@ public class Countries {
                 }
             driver.findElement(By.cssSelector("button[name = save]")).click();
             CountriesWithZones = driver.findElements(By.xpath("//td[6][not(contains(text(),'0'))] /../ td[5] /a"));
+        }
+
+        assertFalse(areElementsPresent(By.name("XXX")));
+        driver.findElement(By.xpath("//span[contains(text(),'Geo Zones')]")).click();
+        CountriesWithZones = driver.findElements(By.cssSelector("tr.row td:nth-child(3) a"));
+
+        for (int i=0;i<CountriesWithZones.size();i++){
+            CountriesWithZones.get(i).click();
+            Zones = driver.findElements(By.cssSelector("#table-zones td:nth-child(3) option[selected = selected]"));
+            for (int y=0;y<Zones.size()-1;y++){
+                str = Zones.get(y).getText();
+                str1 = Zones.get(y+1).getText();
+                if (str.compareTo(str1)>0){
+                    fail();
+                }
+            }
+         //   assertFalse(areElementsPresent(By.name("XXX")));
+            driver.findElement(By.cssSelector("button[name = save]")).click();
+            CountriesWithZones = driver.findElements(By.cssSelector("tr.row td:nth-child(3) a"));
         }
 
     }
