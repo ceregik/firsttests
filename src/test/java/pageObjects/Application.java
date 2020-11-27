@@ -42,15 +42,15 @@ public class Application  {
 
     public void AddNewProduct(int HowManyItems) throws InterruptedException {
         for (int y =0; y<HowManyItems;y++){
-            mainPage.FirstProduct().click();
+            mainPage.FirstProduct.click();
             Thread.sleep(500);
             productPage.AddProductInBusket("Small");
-            productPage.MainPageButton().click();
+            productPage.MainPageButton.click();
         }
         Thread.sleep(500);
     }
     public void GoToBusket() throws InterruptedException {
-        mainPage.Busket().click();
+        mainPage.Busket.click();
         Thread.sleep(500);
     }
 
