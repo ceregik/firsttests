@@ -60,4 +60,7 @@ public class Application  {
         }
 
     }
+    public String CheckBusket() {
+        return (productPage.TextBusket.getText());
+    }
 }
