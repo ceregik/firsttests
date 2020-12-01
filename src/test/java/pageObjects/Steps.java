@@ -18,8 +18,8 @@ public class Steps implements En  {
         When("Go to the shop", () ->{
             app.GoToShop();
         });
-        And("Add 3 first product in buscket",() ->{
-            app.AddNewProduct(3);
+        And("Add {string} first product in buscket",(String count) ->{
+            app.AddNewProduct(Integer.parseInt(count));
         });
         And("Go to the buscket", () ->{
             app.GoToBusket();
