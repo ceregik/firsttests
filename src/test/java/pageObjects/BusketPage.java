@@ -24,9 +24,10 @@ public class BusketPage extends page {
 
     public void DeleteElement(){
         wait.until(ExpectedConditions.visibilityOf(FirstInBusket));
-        FirstInBusket.click();
         String NameProduct = FirstInTable.getText();
-        wait.until(ExpectedConditions.stalenessOf(ElementInTable(NameProduct)));
+        WebElement element = ElementInTable(NameProduct);
+        FirstInBusket.click();
+        wait.until(ExpectedConditions.stalenessOf(element));
     }
 
 }

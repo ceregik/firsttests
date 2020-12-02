@@ -1,4 +1,4 @@
-package pageObjects;
+package CucumberTest;
 
 import io.cucumber.junit.Cucumber;
 import org.junit.runner.RunWith;

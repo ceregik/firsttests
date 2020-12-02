@@ -1,7 +1,8 @@
-package pageObjects;
+package CucumberTest;
 
 import io.cucumber.java8.En;
 import org.junit.Assert;
+import pageObjects.Application;
 
 import javax.xml.transform.Result;
 
@@ -18,10 +19,10 @@ public class Steps implements En  {
         When("Go to the shop", () ->{
             app.GoToShop();
         });
-        And("Add {string} first product in buscket",(String count) ->{
+        And("Add {string} first product in basket",(String count) ->{
             app.AddNewProduct(Integer.parseInt(count));
         });
-        And("Go to the buscket", () ->{
+        And("Go to the basket", () ->{
             app.GoToBusket();
         });
         And("Delete all products", () ->{
